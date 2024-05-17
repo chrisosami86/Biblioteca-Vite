@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 export class book {
     idBook;
     name;
@@ -6,7 +8,7 @@ export class book {
     done;
 
     constructor(name, description, urlImg = ''){
-        this.idBook = 1;
+        this.idBook = uuid();
         this.name = name;
         this.description = description;
         this.done = false;

@@ -15,24 +15,56 @@ const store = {
     filter: Filter.All
 }
 
+//Crea un libro nuevo
 const addBook = ( name, description ) => {
+    if( !name || !description ) throw new Error ('Name and description is required');
     store.books.push( new book (name, description) );
 }
 
+
+//Borra un libro existente
 const deleteBook = ( idBook ) => {
+    if(!idBook) {
+        throw new Error ('idBook is required');
+    };
+
     store.books = store.books.filter( book => {book.idBook !== idBook });
 }
 
-const editBook = ( idBook ) => {
-    throw new Error ('Not Implemented');
+
+//Edita un libro existente
+const editBook = ( idBook, name = '', description ='' ) => {
+    if (!idBook) throw new Error ('idBook is required');
+
+    store.books = store.books.forEach( book => {
+        if (book.idBook === idBook){
+            book.name = name;
+            book.description = description;
+            return book;
+        }else{
+            return book;
+        }
+    })
 }
 
+//Prestar un libro
+//Verdadero para Libre
+//Falso para prestado
 const toggleBook = ( idBook ) => {
-    throw new Error ('Not Implemented');
+    if ( !idBook ) throw new Error('idBook is required');
+
+    store.books = store.books.forEach( book => {
+        if (book.idBook === idBook){
+            book.done = !book.done;
+            return book;
+        }else{
+            return book;
+        }
+    });
 }
 
 const showBooks = ( ) => {
-    throw new Error ('Not Implemented');
+    console.log( store.books );
 }
 
 export default {
