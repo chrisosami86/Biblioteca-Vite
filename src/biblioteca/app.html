@@ -1,38 +1,51 @@
 <h1>Biblioteca</h1>
 
 <div class="container">
-    <h2>Crear libro</h2>
-    <form action="">
+
+    <div class="container__div">
+        <h2>Crear libro</h2>
+
         <label for="">Nombre:</label>
-        <input type="text" placeholder="Escriba el nombre del libro">
+        <input type="text" placeholder="Escriba el nombre del libro" id="nameBook">
         <label for="">Descripción: </label>
-        <textarea name="" id="" placeholder="Escriba descripción del libro"></textarea>
-        <input type="button" value="Crear Libro">
-    </form>
+        <textarea name="" id="descriptionBook" placeholder="Escriba descripción del libro"></textarea>
+        <label for="">Selecciona imagen del libro</label>
+        <input type="file">
+        <div class="img-book-container">
+            <img src="" alt="" id="imgBook">
+        </div>
+        <input type="button" value="Crear Libro" id="btnCreateBook">
 
-</div>
-
-<div class="container">
-    <div class="list-book container">
-        <h2>Listado de Libros</h2>
-        <ul id="listBook">
-            <li><input type="checkbox" name="" id="" checked>a</li>
-        </ul>
     </div>
 
-    <div class="info-book container">
-        <h2>Descripción del libro</h2>
-        <div class="img-container">
-
+    <div class="container__div">
+        <div class="list-book">
+            <h2>Listado de Libros</h2>
+            <ul id="listBook">
+                <li><input type="checkbox" name="" id="" checked>a</li>
+            </ul>
         </div>
-        <div class="description-book-container">
 
-        </div>
+        <div class="info-book">
+            <div class="img-info-container">
+                <img src="/public/assets/javascript.webp" alt="">
+            </div>
+            <div class="description-book-container">
+                <h2>Información del Libro</h2>
+                <p id="nameBook2">JavaScript</p>
+                <p id="descriptionBook2">Con este libro tiene la posibilidad de aprender JavaScript de manera efectiva y clara.
+                    Esta obra está repleta de explicaciones estupendas sobre conceptos de programación y
+                    cómo se aplican en JavaScript. Para ayudar a la comprensión, las explicaciones teóricas
+                    se ilustran con ejemplos prácticos muy interesantes, de mayor o menor complejidad en función
+                    del tema. Así, veremos desde cómo hacer un triángulo, construir una tabla, un robot y un lenguaje
+                    de programación hasta un editor de arte con píxeles.</p>
+                    <div class="btn-book-container">
+                        <input type="button" value="Modificar" id="btnModify">
+                        <input type="button" value="Borrar" id="btnDelete">
+                        <input type="button" value="Pedir Prestado" id="btnLend">
+                    </div>
+            </div>
 
-        <div class="btn-book-container">
-            <input type="button" value="Modificar">
-            <input type="button" value="Borrar">
-            <input type="button" value="Pedir Prestado">
         </div>
     </div>
 </div>

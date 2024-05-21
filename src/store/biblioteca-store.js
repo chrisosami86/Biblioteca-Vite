@@ -63,8 +63,8 @@ const toggleBook = ( idBook ) => {
     });
 }
 
-const showBooks = ( ) => {
-    console.log( store.books );
+const getBooks = ( ) => {
+    return store.books;
 }
 
 export default {
@@ -72,5 +72,5 @@ export default {
     deleteBook,
     editBook,
     toggleBook,
-    showBooks
+    getBooks
 }
