@@ -16,9 +16,9 @@ const store = {
 }
 
 //Crea un libro nuevo
-const addBook = ( name, description ) => {
+const addBook = ( name, description, url = '' ) => {
     if( !name || !description ) throw new Error ('Name and description is required');
-    store.books.push( new book (name, description) );
+    store.books.push( new book (name, description, url) );
 }
 
 

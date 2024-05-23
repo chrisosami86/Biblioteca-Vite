@@ -1,5 +1,5 @@
 import { book } from '../models/book-model';
-import { createBookHtml } from "../store/create-book-html";
+import { createBookHtml } from "./create-book-html";
 
 
 let element;

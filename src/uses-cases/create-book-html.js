@@ -6,7 +6,7 @@ export const createBookHtml = ( book ) => {
     const html = `
         <div class="view">
             <input class="toggle" type="checkbox" ${book.done ? 'checked': ''}>
-            <label>${ book.description }</label>
+            <label>${ book.name }</label>
         </div>
         `;
 
