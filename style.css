@@ -33,6 +33,9 @@ p {
     border: #000 solid 2px;
     height: 270px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 
 }
 
@@ -52,13 +55,15 @@ p {
     display: flex;
     gap: 15px;
     border: #000 solid 2px;
+    width: 600px;
+    height: 361px;
 }
 
 .img-info-container{
-    width: 1000px;
 
     & img{
-        width: 100%;
+        width: 114px;
+        height: 146px;
     }
 }
 
@@ -66,4 +71,19 @@ p {
     display: flex;
     padding: 10px 0;
     gap: 10px;
+}
+
+#imgBook{
+    width: 30%;
+    align-self: center;
+}
+
+.description-book-container{
+    width: 427px;
+    height: 317px;
+}
+#descriptionBook2{
+    width: 100%;
+    height: 70%;
+    overflow: scroll;
 }

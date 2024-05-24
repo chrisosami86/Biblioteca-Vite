@@ -4,10 +4,8 @@ export const createBookHtml = ( book ) => {
     if ( !book ) throw new Error ('A Book object is required');
 
     const html = `
-        <div class="view">
-            <input class="toggle" type="checkbox" ${book.done ? 'checked': ''}>
+            <input class="toggle" type="checkbox">
             <label>${ book.name }</label>
-        </div>
         `;
 
     const liElement = document.createElement('li');

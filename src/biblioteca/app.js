@@ -5,6 +5,8 @@ import { book } from '../models/book-model';
 
 const elementIDs = {
   allBooks: '#listBook',
+  imgBook: '#imgBook',
+  defaultBook: '/public/assets/no book.jpg',
 }
 
 
@@ -17,6 +19,8 @@ export const App = (elementId) => {
     renderBooks(elementIDs.allBooks , books);
   }
 
+  
+
   (()=>{
       const app = document.createElement('div');
           app.innerHTML = appHtml; //mandando la importacion de html en crudo
@@ -28,21 +32,61 @@ export const App = (elementId) => {
   const btnCrear = document.querySelector('#btnCreateBook');
   const nombreLibro = document.querySelector('#nameBook');
   const descripcionLibro = document.querySelector('#descriptionBook');
-  const urlLibro = document.querySelector('#fileId');
   const idArchivo = document.querySelector('#fileId');
+  const bookImg = document.querySelector('#imgBook');
+  const listadoLibros = document.querySelector('#listBook');
+  const pNombreLibro = document.querySelector('#nameBook2');
+  const pDescripcionLibro = document.querySelector('#descriptionBook2')
+  const pImgBook = document.querySelector('#imgBook2');
 
 
+  //reset
+  const resetLabel = () => {
+    nombreLibro.value = '';
+    descripcionLibro.value = '';
+    idArchivo.value = '';
+    bookImg.src = elementIDs.defaultBook;
+  }
 
   //Eventos
   btnCrear.addEventListener('click', () => {
     if(!nombreLibro.value.trim()) throw new Error('The name is required');
     if(!descripcionLibro.value.trim()) throw new Error('The Description is required');
-
-    let imgUrl = urlLibro.value
-    imgUrl = imgUrl.trim().replace(`C:\fakepath`, 'C:/Users/TECNICO-RECUR-TECNOL/Documents/Autodidacta/JavaScript con Fernando/Biblioteca-Vite/public/assets');
-    storeBooks.addBook(nombreLibro.value, descripcionLibro.value,imgUrl);
-    console.log(imgUrl);
+    let urlBook = bookImg.src;   
+    storeBooks.addBook(nombreLibro.value, descripcionLibro.value,urlBook);
+    alert('Libro creado con exito');
+    resetLabel();
     displayBooks(); 
+  });
+
+
+  idArchivo.addEventListener('change', (event) => {
+    if(event.target.files[0]){
+      const reader = new FileReader();
+      reader.onload = function (e){
+        bookImg.src = e.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+      
+    }else{         
+      bookImg.src = elementIDs.defaultBook;
+    }
+
+  });
+
+  listadoLibros.addEventListener('click', (event) => {
+    let element = event.target.closest('[data-id]');
+    let element2 = element.getAttribute('data-id');
+    let libro = storeBooks.getBooks();
+    listadoLibros
+    
+    libro.forEach((book) =>{
+      if(element2 === book.idBook){
+        pNombreLibro.innerHTML = book.name;
+        pDescripcionLibro.innerHTML = book.description;
+        pImgBook.src = book.urlImg;
+      }
+    });
   });
 
 }
