@@ -11,6 +11,7 @@ export const createBookHtml = ( book ) => {
     const liElement = document.createElement('li');
     liElement.innerHTML = html;
     liElement.setAttribute('data-id', book.idBook);
+    liElement.classList.add('nombreLabel');
     if ( book.done ){
         liElement.classList.add('completed');
     }

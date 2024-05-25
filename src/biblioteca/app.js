@@ -76,12 +76,18 @@ export const App = (elementId) => {
 
   listadoLibros.addEventListener('click', (event) => {
     let element = event.target.closest('[data-id]');
-    let element2 = element.getAttribute('data-id');
-    let libro = storeBooks.getBooks();
-    listadoLibros
+    let idBookHtml = element.getAttribute('data-id');
+    let elementos = document.getElementsByClassName('nombreLabel');
+    let libros = storeBooks.getBooks();
     
-    libro.forEach((book) =>{
-      if(element2 === book.idBook){
+    for(let i=0; i< elementos.length; i++){
+      elementos[i].style.background = '';
+    }
+
+    
+    libros.forEach((book) =>{
+      if(idBookHtml === book.idBook){
+        element.style.background = 'lightblue';
         pNombreLibro.innerHTML = book.name;
         pDescripcionLibro.innerHTML = book.description;
         pImgBook.src = book.urlImg;
