@@ -7,6 +7,7 @@ const elementIDs = {
   allBooks: '#listBook',
   imgBook: '#imgBook',
   defaultBook: '/public/assets/no book.jpg',
+  dataIdModificar: ''
 }
 
 
@@ -38,6 +39,15 @@ export const App = (elementId) => {
   const pNombreLibro = document.querySelector('#nameBook2');
   const pDescripcionLibro = document.querySelector('#descriptionBook2')
   const pImgBook = document.querySelector('#imgBook2');
+  const btnModificar = document.querySelector('#btnModify');
+  const ventanaModal = document.querySelector('#modal');
+  const nombreModificado = document.querySelector('#nameBook3');
+  const descriModificada = document.querySelector('#descriptionBook3');
+  const urlImgModificada = document.querySelector('#fileId3');
+  const ImgModificada = document.querySelector('#imgBook3');
+  const btnModificarCambios = document.querySelector('#btnModifyBook3');
+
+
 
 
   //reset
@@ -56,7 +66,7 @@ export const App = (elementId) => {
     storeBooks.addBook(nombreLibro.value, descripcionLibro.value,urlBook);
     alert('Libro creado con exito');
     resetLabel();
-    displayBooks(); 
+    displayBooks();
   });
 
 
@@ -77,6 +87,7 @@ export const App = (elementId) => {
   listadoLibros.addEventListener('click', (event) => {
     let element = event.target.closest('[data-id]');
     let idBookHtml = element.getAttribute('data-id');
+    elementIDs.dataIdModificar = idBookHtml;
     let elementos = document.getElementsByClassName('nombreLabel');
     let libros = storeBooks.getBooks();
     
@@ -93,6 +104,52 @@ export const App = (elementId) => {
         pImgBook.src = book.urlImg;
       }
     });
+  });
+
+  urlImgModificada.addEventListener('change', (event) => {
+    if(event.target.files[0]){
+      const reader = new FileReader();
+      reader.onload = function (e){
+        ImgModificada.src = e.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+      
+    }else{         
+      ImgModificada.src = elementIDs.defaultBook;
+    }
+
+  });
+
+  btnModificar.addEventListener('click', () => {
+    ventanaModal.show();
+    ventanaModal.style.display = 'flex';
+    document.querySelector('#fondoModal').style.display = 'block';
+    let libros = storeBooks.getBooks();
+
+    libros.forEach((book) =>{
+      if(elementIDs.dataIdModificar === book.idBook){
+        nombreModificado.value = book.name;
+        descriModificada.value = book.description;
+        ImgModificada.src = book.urlImg;
+      }
+    });
+
+  });
+
+
+  btnModificarCambios.addEventListener('click', () => {
+    if(ImgModificada.src.trim() === ''){
+      storeBooks.editBook(elementIDs.dataIdModificar, nombreModificado.value, descriModificada.value, elementIDs.defaultBook);
+      urlImgModificada.value = '';
+      displayBooks();
+    }else{
+      storeBooks.editBook(elementIDs.dataIdModificar, nombreModificado.value, descriModificada.value, ImgModificada.src);
+      urlImgModificada.value = '';
+      displayBooks();
+    }
+    document.querySelector('#fondoModal').style.display = 'none';
+    ventanaModal.style.display = 'none';
+    ventanaModal.close();
   });
 
 }

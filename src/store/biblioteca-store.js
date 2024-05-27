@@ -33,13 +33,14 @@ const deleteBook = ( idBook ) => {
 
 
 //Edita un libro existente
-const editBook = ( idBook, name = '', description ='' ) => {
+const editBook = ( idBook, name = '', description ='', urlImg = '') => {
     if (!idBook) throw new Error ('idBook is required');
 
-    store.books = store.books.forEach( book => {
+    store.books = store.books.map( book => {
         if (book.idBook === idBook){
             book.name = name;
             book.description = description;
+            book.urlImg = urlImg;
             return book;
         }else{
             return book;
