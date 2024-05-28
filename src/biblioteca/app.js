@@ -110,8 +110,10 @@ export const App = (elementId) => {
         pImgBook.src = book.urlImg;
         if(book.done === false){
           imgDisponibilidad.src = elementIDs.imgDisponible;
+          btnPrestar.value = 'Pedir Prestado';
         }else{
           imgDisponibilidad.src = elementIDs.imgNoDisponible;
+          btnPrestar.value = 'Devolver Libro';
         }
 
       }
@@ -178,7 +180,8 @@ export const App = (elementId) => {
 
   btnPrestar.addEventListener('click', () => {
     storeBooks.toggleBook(elementIDs.dataIdModificar);
-    alert('El libro fue prestado con exito');
+    alert('Accion Exitosa');
+    elementIDs.dataIdModificar = '';
     displayBooks();
   });
 
