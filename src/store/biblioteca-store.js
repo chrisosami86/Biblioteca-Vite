@@ -28,7 +28,7 @@ const deleteBook = ( idBook ) => {
         throw new Error ('idBook is required');
     };
 
-    store.books = store.books.filter( book => {book.idBook !== idBook });
+    store.books = store.books.filter( (book) => book.idBook !== idBook );
 }
 
 
@@ -54,7 +54,7 @@ const editBook = ( idBook, name = '', description ='', urlImg = '') => {
 const toggleBook = ( idBook ) => {
     if ( !idBook ) throw new Error('idBook is required');
 
-    store.books = store.books.forEach( book => {
+    store.books = store.books.map( book => {
         if (book.idBook === idBook){
             book.done = !book.done;
             return book;

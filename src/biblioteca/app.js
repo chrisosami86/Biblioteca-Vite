@@ -7,7 +7,10 @@ const elementIDs = {
   allBooks: '#listBook',
   imgBook: '#imgBook',
   defaultBook: '/public/assets/no book.jpg',
-  dataIdModificar: ''
+  dataIdModificar: '',
+  imgDisponible: '/public/assets/disponible.png',
+  imgNoDisponible: '/public/assets/nodisponible.png',
+  imgNoSeleccionado: '/public/assets/noseleccionado.png'
 }
 
 
@@ -46,6 +49,9 @@ export const App = (elementId) => {
   const urlImgModificada = document.querySelector('#fileId3');
   const ImgModificada = document.querySelector('#imgBook3');
   const btnModificarCambios = document.querySelector('#btnModifyBook3');
+  const btnBorrar = document.querySelector('#btnDelete');
+  const imgDisponibilidad = document.querySelector('#disponiblidad');
+  const btnPrestar = document.querySelector('#btnLend');
 
 
 
@@ -102,6 +108,12 @@ export const App = (elementId) => {
         pNombreLibro.innerHTML = book.name;
         pDescripcionLibro.innerHTML = book.description;
         pImgBook.src = book.urlImg;
+        if(book.done === false){
+          imgDisponibilidad.src = elementIDs.imgDisponible;
+        }else{
+          imgDisponibilidad.src = elementIDs.imgNoDisponible;
+        }
+
       }
     });
   });
@@ -121,6 +133,7 @@ export const App = (elementId) => {
   });
 
   btnModificar.addEventListener('click', () => {
+    if(elementIDs.dataIdModificar.trim() === '') throw new Error('idBook is required');
     ventanaModal.show();
     ventanaModal.style.display = 'flex';
     document.querySelector('#fondoModal').style.display = 'block';
@@ -141,15 +154,32 @@ export const App = (elementId) => {
     if(ImgModificada.src.trim() === ''){
       storeBooks.editBook(elementIDs.dataIdModificar, nombreModificado.value, descriModificada.value, elementIDs.defaultBook);
       urlImgModificada.value = '';
+      elementIDs.dataIdModificar = '';
       displayBooks();
     }else{
       storeBooks.editBook(elementIDs.dataIdModificar, nombreModificado.value, descriModificada.value, ImgModificada.src);
       urlImgModificada.value = '';
+      elementIDs.dataIdModificar = '';
       displayBooks();
     }
     document.querySelector('#fondoModal').style.display = 'none';
     ventanaModal.style.display = 'none';
     ventanaModal.close();
+  });
+
+  btnBorrar.addEventListener('click', () => {
+    storeBooks.deleteBook(elementIDs.dataIdModificar);
+    alert('Libro Borrado con exito');
+    imgDisponibilidad.src = elementIDs.imgNoSeleccionado;
+    elementIDs.dataIdModificar = '';
+    displayBooks();
+
+  });
+
+  btnPrestar.addEventListener('click', () => {
+    storeBooks.toggleBook(elementIDs.dataIdModificar);
+    alert('El libro fue prestado con exito');
+    displayBooks();
   });
 
 }
