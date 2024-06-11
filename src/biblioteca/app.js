@@ -1,16 +1,15 @@
 import storeBooks from '../store/biblioteca-store'
 import appHtml from '../biblioteca/app.html?raw';
 import { renderBooks } from '../uses-cases/render-books';
-import { book } from '../models/book-model';
 
 const elementIDs = {
   allBooks: '#listBook',
   imgBook: '#imgBook',
-  defaultBook: '/public/assets/no book.jpg',
+  defaultBook: '../assets/noBook.jpg',
   dataIdModificar: '',
-  imgDisponible: '/public/assets/disponible.png',
-  imgNoDisponible: '/public/assets/nodisponible.png',
-  imgNoSeleccionado: '/public/assets/noseleccionado.png'
+  imgDisponible: '../assets/disponible.png',
+  imgNoDisponible: '../assets/nodisponible.png',
+  imgNoSeleccionado: '../assets/noseleccionado.png'
 }
 
 
